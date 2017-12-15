@@ -1,3 +1,4 @@
+
 // 本地存储localStorage
 class Storage {
   constructor () {
@@ -30,4 +31,4 @@ class Storage {
     this.storage.removeItem(this.prefix + key)
   }
 }
-module.exports = new Storage()
+export default new Storage()

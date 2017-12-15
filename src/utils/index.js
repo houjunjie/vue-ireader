@@ -1,3 +1,4 @@
+
 /**
  * 格式化日期
  * @param  {string} str 需要格式化的样子
@@ -6,7 +7,9 @@
  * @template  formatDate('YYYY年mm月dd日hh小时ff分钟ss秒 星期w','2017/1/1 12:13:14') 返回：2017年01月01日12小时13分钟14秒 星期日;
  */
 function formatDate (str, day) {
-  let d, arr, type = Object.prototype.toString.call(day)
+  let d = null
+  let arr = []
+  let type = Object.prototype.toString.call(day)
   if (type === '[object Date]') {
     d = day
   } else if (type === '[object String' && (arr = day.match(/(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:\s+(\d{1,2}):(\d{1,2}):(\d{1,2}))?/))) {
@@ -35,9 +38,10 @@ function formatDate (str, day) {
     return obj[k.toLowerCase()] || ''
   })
 }
-
-module.exports = {
-  storage: require('./storage.js'),
-  fetch: require('./fetch.js'),
+const utils = {
   formatDate
 }
+export default utils
+// export fetch
+// export storage
+// export formatDate
