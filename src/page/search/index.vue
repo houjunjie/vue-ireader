@@ -1,17 +1,23 @@
 <template>
   <div>
-    {{msg}}
     <searchbar @on-change="onChange"></searchbar>
+    <div v-for="list in search.lists">
+      <item :item="list"></item>
+    </div>
   </div>
 </template>
 <script>
   import searchbar from '../../components/scrchbar.vue'
+  import item from './item.vue'
   import api from '../../server/api.js'
   import fetch from '../../utils/fetch.js'
+  import { mapActions, mapState } from 'vuex'
+  import { SEARCH_SETBOOKLIST } from '../../store/search.js'
   export default {
     name: 'search',
     components: {
-      searchbar
+      searchbar,
+      item
     },
     data () {
       return {
@@ -19,24 +25,23 @@
       }
     },
     methods: {
+      ...mapActions([SEARCH_SETBOOKLIST]),
       onChange: function (value) {
-        // server.search(value)
-        // fetch.get(api.search, {'query': value}, (data, err) => {
-        //   console.log(data)
-        // })
         fetch.get(api.search, {
           params: {
             query: value
           }
         })
-        .then(function (response) {
-          console.log(response)
+        .then((response) => {
+          this.SEARCH_SETBOOKLIST(response.data.books)
         })
         .catch(function (error) {
           console.log(error)
         })
-        console.log(value, 'search')
       }
+    },
+    computed: {
+      ...mapState({ search: state => state.search })
     }
   }
 </script>

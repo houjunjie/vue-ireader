@@ -14,7 +14,7 @@ module.exports = {
 
       // }
     },
-    'agent': {
+    '/agent': {
       target: 'http://statics.zhuishushenqi.com/',
       changeOrigin: true
     }
