@@ -1,7 +1,8 @@
 // import fetch from '../utils/fetch.js'
 
 export default {
-  search: '/api/book/fuzzy-search?start=0&limit=10'
+  search: '/api/book/fuzzy-search?start=0&limit=10',
+  detail: '/api/book'
 }
 // 获取书源
 // export function getSource (id) {

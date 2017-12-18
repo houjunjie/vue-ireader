@@ -1,5 +1,5 @@
 <template>
-  <div class='item'>
+  <div class='item' @click="goDetail(item._id)">
     <img class="cover" :src="item.cover" alt="" />
     <h5>{{item.title}}</h5>
     <p class="author">{{item.author}}</p>
@@ -13,7 +13,13 @@
 <script>
   export default {
     name: 'item',
-    props: ['item']
+    props: ['item'],
+    methods: {
+      goDetail: function (id) {
+        console.log(id)
+        this.$router.push({path: `detail/${id}`})
+      }
+    }
   }
 </script>
 
