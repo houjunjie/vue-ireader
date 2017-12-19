@@ -5,6 +5,7 @@ import Home from '@/page/home'
 import Index from '@/page/index'
 import Search from '@/page/search'
 import Detail from '@/page/detail'
+import Reader from '@/page/reader'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/detail/:id',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/reader/:id',
+      name: 'Reader',
+      component: Reader
     }
   ]
 })

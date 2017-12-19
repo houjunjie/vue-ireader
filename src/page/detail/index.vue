@@ -36,6 +36,7 @@
 <script>
   import { mapActions, mapState } from 'vuex'
   import { SEARCH_GETBOOKDETAIL } from '../../store/search.js'
+  import { READER_GETSOURCE } from '../../store/reader.js'
   export default {
     name: 'detail',
     data () {
@@ -48,15 +49,16 @@
       this.getDeatil()
     },
     methods: {
-      ...mapActions({SEARCH_GETBOOKDETAIL}),
+      ...mapActions({SEARCH_GETBOOKDETAIL, READER_GETSOURCE}),
       getDeatil: function () {
         this.SEARCH_GETBOOKDETAIL(this.$route.params.id)
       },
       back: function () {
-
+        this.$router.go(-1)
       },
-      readNow: function () {
-
+      readNow: function (id) {
+        this.READER_GETSOURCE(id)
+        this.$router.push({path: `/reader/${id}`})
       }
 
     },
