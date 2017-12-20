@@ -2,7 +2,8 @@
 
 export default {
   search: '/api/book/fuzzy-search?start=0&limit=10',
-  detail: '/api/book'
+  detail: '/api/book',
+  getSource: '/api/toc?view=summary'
 }
 // 获取书源
 // export function getSource (id) {

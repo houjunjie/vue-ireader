@@ -1,5 +1,5 @@
-// import api from '../server/api.js'
-// import fetch from '../utils/fetch.js'
+import api from '../server/api.js'
+import fetch from '../utils/fetch.js'
 
 export const READER_GETSOURCE = 'READER_GETSOURCE'
 
@@ -34,8 +34,20 @@ export default {
         console.log('详情不存在，前往获取')
         // detail = yield call(readerServices.getDetail, id);
       }
+      fetch.get(api.getSource, {
+        params: {
+          book: id
+        }
+      })
+      .then(res => {
+        console.log(res)
+        console.log(`从网络获取《${detail.title}》`)
+        // commit(READER_GETSOURCE, res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
       // const data = yield call(readerServices.getSource, id);
-      console.log(`从网络获取《${detail.title}》`)
       // yield put({ type: 'reader/save', payload: { source: data, id, detail } });
       console.log(`阅读：${detail.title}`)
     }
