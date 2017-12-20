@@ -2,6 +2,7 @@ import api from '../server/api.js'
 import fetch from '../utils/fetch.js'
 
 export const READER_GETSOURCE = 'READER_GETSOURCE'
+export const READER_SAVEDETAIL = 'READER_SAVEDETAIL'
 
 export default {
   state: {
@@ -11,6 +12,11 @@ export default {
     chapters: [],       // 章节列表
     chapter: {},        // 当前章节
     detail: {}         // 书籍详情
+  },
+  mutations: {
+    [READER_SAVEDETAIL] (state, detail) {
+      Object.assign(state, ...detail)
+    }
   },
   actions: {
     [READER_GETSOURCE] ({commit, state, rootState}, id) { // state：当前state，rootState：根state
@@ -42,7 +48,7 @@ export default {
       .then(res => {
         console.log(res)
         console.log(`从网络获取《${detail.title}》`)
-        // commit(READER_GETSOURCE, res.data)
+        commit(READER_SAVEDETAIL, {source: res.data, id, detail})
       })
       .catch(err => {
         console.log(err)
