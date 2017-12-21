@@ -14,12 +14,16 @@
         msg: 'reader'
       }
     },
+    mounted: function () {
+      console.log(this.$route.params)
+      this.READER_GETSOURCE(this.$route.params.id)
+    },
     methods: {
       ...mapActions([READER_GETSOURCE])
     }
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 </style>

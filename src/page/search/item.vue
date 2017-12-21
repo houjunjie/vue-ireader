@@ -23,7 +23,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .item {
     margin: 12px 12px;
     height: 104px;

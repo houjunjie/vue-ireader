@@ -4,11 +4,14 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
+    ecmaVersion: 2017,
     sourceType: 'module',
-    ecmaVersion: 8
   },
   env: {
     browser: true,
+    node: true,
+    commonjs: true,
+    es6: true
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: 'standard',

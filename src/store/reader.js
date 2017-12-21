@@ -19,7 +19,7 @@ export default {
     }
   },
   actions: {
-    [READER_GETSOURCE] ({commit, state, rootState}, id) { // state：当前state，rootState：根state
+    async [READER_GETSOURCE] ({commit, state, rootState, dispatch}, id) { // state：当前state，rootState：根state
       // const { id } = query;
       const { id: currentId, detail: { title } } = state
       console.log(state, rootState, 'reader state')
@@ -39,20 +39,30 @@ export default {
       if (!detail._id) {
         console.log('详情不存在，前往获取')
         // detail = yield call(readerServices.getDetail, id);
+        const d = await fetch({
+          url: `${api.detail}/${id}`,
+          methods: 'get'
+        })
+        console.log(d, 2)
       }
-      fetch.get(api.getSource, {
+      const data = await fetch.get(api.getSource, {
         params: {
           book: id
         }
       })
-      .then(res => {
-        console.log(res)
+      console.log(data)
+      if (data.status === 200) {
         console.log(`从网络获取《${detail.title}》`)
-        commit(READER_SAVEDETAIL, {source: res.data, id, detail})
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        commit(READER_SAVEDETAIL, {source: data.data, id, detail})
+      }
+      // .then(res => {
+      //   console.log(res)
+      //   console.log(`从网络获取《${detail.title}》`)
+      //   commit(READER_SAVEDETAIL, {source: res.data, id, detail})
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
       // const data = yield call(readerServices.getSource, id);
       // yield put({ type: 'reader/save', payload: { source: data, id, detail } });
       console.log(`阅读：${detail.title}`)

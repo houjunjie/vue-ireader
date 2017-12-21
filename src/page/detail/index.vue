@@ -68,7 +68,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .gaussian {
   position: relative;
   overflow: hidden;

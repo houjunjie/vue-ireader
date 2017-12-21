@@ -23,15 +23,23 @@ export default {
     [SEARCH_SETBOOKLIST] ({ commit }, lists) {
       commit(SEARCH_SETBOOKLIST, lists)
     },
-    [SEARCH_GETBOOKDETAIL] ({commit}, id) {
-      fetch.get(`${api.detail}/${id}`)
-      .then(res => {
-        console.log(res)
-        commit(SEARCH_SETBOOKDETAIL, res.data)
+    async [SEARCH_GETBOOKDETAIL] ({commit}, id) {
+      const data = await fetch({
+        url: `${api.detail}/${id}`,
+        methods: 'get'
       })
-      .catch(err => {
-        console.log(err)
-      })
+      commit(SEARCH_SETBOOKDETAIL, data)
+      // if (data.statusCode === 200) {
+      //   console.log(data)
+
+      // }
+      // .then(res => {
+      //   console.log(res)
+      //   commit(SEARCH_SETBOOKDETAIL, res.data)
+      // })
+      // .catch(err => {
+      //   console.log(err)
+      // })
     }
   }
 }

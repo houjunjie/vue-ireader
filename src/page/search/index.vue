@@ -27,17 +27,32 @@
     methods: {
       ...mapActions([SEARCH_SETBOOKLIST]),
       onChange: function (value) {
-        fetch.get(api.search, {
-          params: {
-            query: value
-          }
-        })
-        .then((response) => {
-          this.SEARCH_SETBOOKLIST(response.data.books)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+        const getData = async () => {
+          const data = await fetch({
+            url: api.search,
+            methods: 'get',
+            data: {
+              query: value
+            }
+          })
+          console.log(data)
+          this.SEARCH_SETBOOKLIST(data.books)
+        }
+        getData()
+        // fetch({
+        //   url: api.search,
+        //   methods: 'get',
+        //   data: {
+        //     query: value
+        //   }
+        // })
+        // .then((response) => {
+        //   console.log(response)
+        //   this.SEARCH_SETBOOKLIST(response.books)
+        // })
+        // .catch(function (error) {
+        //   console.log(error)
+        // })
       }
     },
     computed: {
