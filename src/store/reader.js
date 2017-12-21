@@ -3,6 +3,11 @@ import fetch from '../utils/fetch.js'
 
 export const READER_GETSOURCE = 'READER_GETSOURCE'
 export const READER_SAVEDETAIL = 'READER_SAVEDETAIL'
+export const READER_GETCHAPTERLIST = 'READER_GETCHAPTERLIST'
+export const READER_GETCHAPTER = 'READER_GETCHAPTER'
+export const READER_GOTOCHAPTER = 'READER_GOTOCHAPTER'
+export const READER_GETNEXTSOURCE = 'READER_GETNEXTSOURCE'
+export const READER_RESTORE = 'READER_RESTORE'
 
 export default {
   state: {
@@ -44,9 +49,12 @@ export default {
           methods: 'get'
         })
         console.log(d, 2)
+        detail = d.data
       }
-      const data = await fetch.get(api.getSource, {
-        params: {
+      const data = await fetch({
+        url: api.getSource,
+        methods: 'get',
+        data: {
           book: id
         }
       })
@@ -65,7 +73,15 @@ export default {
       // })
       // const data = yield call(readerServices.getSource, id);
       // yield put({ type: 'reader/save', payload: { source: data, id, detail } });
+      dispatch(READER_GETCHAPTERLIST)
       console.log(`阅读：${detail.title}`)
+    },
+    async [READER_GETCHAPTERLIST] ({commit, state, rootState}) {
+      const {source, currentSource} = state
+      if (currentSource >= source.length) {
+        console.log('什么鬼？')
+        commit(READER_SAVEDETAIL, {currentSource: 0})
+      }
     }
   }
 }
