@@ -3,7 +3,9 @@
 export default {
   search: '/api/book/fuzzy-search?start=0&limit=10',
   detail: '/api/book',
-  getSource: '/api/toc?view=summary'
+  getSource: '/api/toc?view=summary',
+  getToc: `/api/toc`,
+  getChapter: '/chapter'
 }
 // 获取书源
 // export function getSource (id) {

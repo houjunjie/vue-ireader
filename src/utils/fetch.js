@@ -51,11 +51,11 @@ export default function fetch (options) {
   return request(options).then((response) => {
     const { statusText, status } = response
     let data = response.data
-    if (data instanceof Array) {
-      data = {
-        list: data
-      }
-    }
+    // if (data instanceof Array) {
+    //   data = {
+    //     list: data
+    //   }
+    // }
     console.log(data)
     return Promise.resolve({
       success: true,
