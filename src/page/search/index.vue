@@ -35,8 +35,8 @@
               query: value
             }
           })
-          console.log(data)
-          this.SEARCH_SETBOOKLIST(data.books)
+          console.log(data, 'data')
+          this.SEARCH_SETBOOKLIST(data.data.books)
         }
         getData()
         // fetch({

@@ -28,7 +28,7 @@ export default {
         url: `${api.detail}/${id}`,
         methods: 'get'
       })
-      commit(SEARCH_SETBOOKDETAIL, data)
+      commit(SEARCH_SETBOOKDETAIL, data.data)
       // if (data.statusCode === 200) {
       //   console.log(data)
 
