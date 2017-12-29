@@ -1,6 +1,7 @@
 <template>
   <div class="content">
-  {{chapter.body}}
+  <!-- {{chapter.body}} -->
+  <p v-for="(text, index) in formateData" :key="index">{{text}}</p>
   </div>
 </template>
 
@@ -15,7 +16,15 @@
       }
     },
     computed: {
-      ...mapState({ chapter: state => state.reader.chapter })
+      ...mapState({ chapter: state => state.reader.chapter }),
+      formateData: function () {
+        if (this.chapter.body) {
+          // console.log(this.chapter.body.indexOf('\n'), 'chapter')
+          let data = this.chapter.body.split('\n')
+          // console.log(this.chapter, data, 'chapter')
+          return data
+        }
+      }
     }
   }
 </script>

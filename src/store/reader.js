@@ -120,8 +120,9 @@ export default {
       }
     },
     async [READER_GOTOCHAPTER] ({commit, state, rootState, dispatch}, payload) {
+      console.log(payload, 'payload')
       const { chapters } = state
-      const nextChapter = payload.nextChapter
+      const nextChapter = payload
       if (nextChapter > chapters.length) {
         console.log('没有下一章啦')
         return
@@ -129,6 +130,7 @@ export default {
       if (nextChapter < 0) {
         console.log('没有上一章啦')
       }
+      console.log(nextChapter)
       commit(READER_SAVE, {currentChapter: nextChapter})
       dispatch(READER_GETCHAPTER)
     },
