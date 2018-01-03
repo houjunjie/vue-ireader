@@ -31,11 +31,14 @@
     methods: {
       ...mapActions([READER_GETSOURCE, READER_GOTOCHAPTER]),
       next: function () {
-        console.log(this.reader, '3333')
+        console.log(this.reader.currentChapter, '3333')
         this.READER_GOTOCHAPTER(this.reader.currentChapter + 1)
       },
       prev: function () {
         this.READER_GOTOCHAPTER(this.reader.currentChapter - 1)
+      },
+      goToChapters: function () {
+        this.$router.push({path: '/cps'})
       }
     },
     computed: {

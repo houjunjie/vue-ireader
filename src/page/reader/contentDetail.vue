@@ -20,7 +20,7 @@
       formateData: function () {
         if (this.chapter.body) {
           // console.log(this.chapter.body.indexOf('\n'), 'chapter')
-          let data = this.chapter.body.split('\n')
+          let data = this.chapter.cpContent.split('\n')
           // console.log(this.chapter, data, 'chapter')
           return data
         }

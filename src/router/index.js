@@ -6,6 +6,7 @@ import Index from '@/page/index'
 import Search from '@/page/search'
 import Detail from '@/page/detail'
 import Reader from '@/page/reader'
+import Chapter from '@/page/chapters'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/reader/:id',
       name: 'Reader',
       component: Reader
+    },
+    {
+      path: '/cps',
+      name: 'Chapter',
+      component: Chapter
     }
   ]
 })
