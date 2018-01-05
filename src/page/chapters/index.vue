@@ -2,12 +2,13 @@
   <div>
     <div class="top">
       <div class="range">
-        <input v-model="range" max="reader.chapters.length" min="0" step="1"  ref="range" type="range">
+        <input v-model="range" :max="reader.chapters.length" min="0" step="1"  ref="range" type="range">
       </div>
-      <a href="javascript:;" @click="back()"></a>
+      <a href="javascript:;" @click="back()">取消</a>
+      <a href="javascript:;" @click="changeSource()">换源</a>
     </div>
     <ul class="list">
-      <li v-for="(list, index) in reader.chapters" :key="index">
+      <li v-for="(list, index) in reader.chapters" :key="index" :id="index+1">
         <a href="javascript:;"
         :style="{color: (index === reader.currentChapter ? 'red' : '')}"
         @click="goToChapter(index)"
@@ -28,7 +29,13 @@
     data: function () {
       return {
         msg: 'chapters',
-        range: this.reader.chapters.length
+        range: this.$store.state.reader.currentChapter
+      }
+    },
+    watch: {
+      range: function (newRange) {
+        console.log(newRange)
+        this.skip()
       }
     },
     methods: {
@@ -38,16 +45,22 @@
       },
       goToChapter: function (nextChapter) {
         this.READER_GOTOCHAPTER(nextChapter)
-        this.$router.go(-1)
+        // this.$router.go(-1)
+        const id = this.reader.detail._id
+        this.$router.push({path: `/reader/${id}`})
       },
       skip: function () {
         setTimeout(() => {
           try {
+            console.log(this.$refs.range.value, 222)
             document.getElementById(this.$refs.range.value).scrollIntoView(false)
           } catch (error) {
             console.log(error)
           }
         }, 100)
+      },
+      changeSource: function () {
+        this.$router.push({path: `/source`})
       }
     },
     computed: {

@@ -23,4 +23,8 @@ export default {
   background: #fafbfc;
   position: relative;
 }
+*{
+  padding: 0;
+  margin: 0;
+}
 </style>

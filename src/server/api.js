@@ -5,7 +5,13 @@ export default {
   detail: '/api/book',
   getSource: '/api/toc?view=summary',
   getToc: `/api/toc`,
-  getChapter: '/chapter'
+  getAtoc: `/api/atoc`,
+  getChapter: '/chapter',
+  getAtocSource: '/api/atoc?view=summary'
+  // bookSearch: `/book/search_book`, // 搜索
+  // allBookSearch: `/book/book_search_all`,
+  // getBookInfo: `/book/get_book_info` // 详情
+  // chapter: ``
 }
 // 获取书源
 // export function getSource (id) {

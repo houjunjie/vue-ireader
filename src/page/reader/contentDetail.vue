@@ -18,9 +18,10 @@
     computed: {
       ...mapState({ chapter: state => state.reader.chapter }),
       formateData: function () {
+        console.log(this.chapter, 'ch')
         if (this.chapter.body) {
           // console.log(this.chapter.body.indexOf('\n'), 'chapter')
-          let data = this.chapter.cpContent.split('\n')
+          let data = this.chapter.body.split('\n')
           // console.log(this.chapter, data, 'chapter')
           return data
         }

@@ -5,7 +5,7 @@
         <span>返回</span>
       </span>
       <div class="book">
-        <img class="cover" :src="detail.cover" alt="" />
+        <!-- <img class="cover" :src="detail.cover" alt="" /> -->
         <div class="info">
           <h1>{{detail.title}}</h1>
           <p>{{detail.author}}</p>
@@ -57,7 +57,9 @@
         this.$router.go(-1)
       },
       readNow: function (id) {
+        console.log(id, 'id')
         this.READER_GETSOURCE(id)
+        // this.$router.push({path: `/source/${id}`})
         this.$router.push({path: `/reader/${id}`})
       }
 

@@ -8,6 +8,7 @@ export const READER_GETCHAPTER = 'READER_GETCHAPTER'
 export const READER_GOTOCHAPTER = 'READER_GOTOCHAPTER'
 export const READER_GETNEXTSOURCE = 'READER_GETNEXTSOURCE'
 export const READER_RESTORE = 'READER_RESTORE'
+export const READER_GETATOCSOURCE = 'READER_GETATOCSOURCE'
 
 export default {
   state: {
@@ -16,7 +17,8 @@ export default {
     source: [],         // 源列表
     chapters: [],       // 章节列表
     chapter: {},        // 当前章节
-    detail: {}         // 书籍详情
+    detail: {},         // 书籍详情
+    atocSourceList: []  // 所有资源列表
   },
   mutations: {
     [READER_SAVE] (state, detail) {
@@ -27,6 +29,7 @@ export default {
     async [READER_GETSOURCE] ({commit, state, rootState, dispatch}, id) { // state：当前state，rootState：根state
       // const { id } = query;
       const { id: currentId, detail: { title } } = state
+      console.log(state, 'stateeee')
       if (currentId) {
         if (id !== currentId) {
           // const { reader, store: { [id]: book } } = yield select();
@@ -71,7 +74,21 @@ export default {
       // const data = yield call(readerServices.getSource, id);
       // yield put({ type: 'reader/save', payload: { source: data, id, detail } });
       dispatch(READER_GETCHAPTERLIST)
+      console.log(data.data, 'source')
       console.log(`阅读：${detail.title}`)
+    },
+    async [READER_GETATOCSOURCE] ({commit, state, rootState, dispatch}, id) {
+      // const {source, currentSource} = state
+      console.log(state, 'state')
+      const data = await fetch({
+        url: `${api.getAtocSource}`,
+        methods: 'get',
+        data: {
+          book: id
+        }
+      })
+      console.log(data, 'atoc')
+      commit(READER_SAVE, {atocSourceList: data.data})
     },
     async [READER_GETCHAPTERLIST] ({commit, state, rootState, dispatch}) {
       const {source, currentSource} = state

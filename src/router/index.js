@@ -7,6 +7,7 @@ import Search from '@/page/search'
 import Detail from '@/page/detail'
 import Reader from '@/page/reader'
 import Chapter from '@/page/chapters'
+import AtocSource from '@/page/atocsource'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/cps',
       name: 'Chapter',
       component: Chapter
+    },
+    {
+      path: '/source',
+      name: 'atocsource',
+      component: AtocSource
     }
   ]
 })

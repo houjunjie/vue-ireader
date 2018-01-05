@@ -1,6 +1,6 @@
 <template>
   <div class='item' @click="goDetail(item._id)">
-    <img class="cover" :src="item.cover" alt="" />
+    <!-- <img class="cover" :src="item.cover" alt="" /> -->
     <h5>{{item.title}}</h5>
     <p class="author">{{item.author}}</p>
     <p class="meta" v-if="item.wordCount > 1000">{{parseInt(item.wordCount / 10000, 0)}}万字、{{item.latelyFollower}} 人在追</p>

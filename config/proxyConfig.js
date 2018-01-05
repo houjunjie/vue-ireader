@@ -14,6 +14,17 @@ module.exports = {
 
       // }
     },
+    // '/chapter': {
+    //   target: 'http://chapterapi.nbgwx.com/',
+    //   changeOrigin: true,
+    //   // pathRewrite: {
+
+    //   // }
+    // },
+    '/book': {
+      target: 'http://bookapi.nbgwx.com/',
+      changeOrigin: true,
+    },
     '/agent': {
       target: 'http://statics.zhuishushenqi.com/',
       changeOrigin: true
