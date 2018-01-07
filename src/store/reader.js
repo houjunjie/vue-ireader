@@ -1,5 +1,6 @@
 import api from '../server/api.js'
 import fetch from '../utils/fetch.js'
+import { STORE_SAVE } from './store'
 
 export const READER_GETSOURCE = 'READER_GETSOURCE'
 export const READER_SAVE = 'READER_SAVE'
@@ -9,6 +10,7 @@ export const READER_GOTOCHAPTER = 'READER_GOTOCHAPTER'
 export const READER_GETNEXTSOURCE = 'READER_GETNEXTSOURCE'
 export const READER_RESTORE = 'READER_RESTORE'
 export const READER_GETATOCSOURCE = 'READER_GETATOCSOURCE'
+export const READER_CLEAR = 'READER_CLEAR'
 
 export default {
   state: {
@@ -22,22 +24,44 @@ export default {
   },
   mutations: {
     [READER_SAVE] (state, detail) {
+      console.log(detail)
       Object.assign(state, detail)
+    },
+    [READER_CLEAR] (state) {
+      state = {
+        currentSource: 1,   // 当前源下标：默认为1，跳过优质书源
+        currentChapter: 0,  // 当前章节下标
+        source: [],         // 源列表
+        chapters: [],       // 章节列表
+        chapter: {},        // 当前章节
+        detail: {},         // 书籍详情
+        atocSourceList: []  // 所有资源列表
+      }
+      console.log(state, 'clear')
     }
   },
   actions: {
     async [READER_GETSOURCE] ({commit, state, rootState, dispatch}, id) { // state：当前state，rootState：根state
       // const { id } = query;
-      const { id: currentId, detail: { title } } = state
-      console.log(state, 'stateeee')
+      const { detail: { title } } = state
+      const currentId = state.id
+      console.log(id, currentId, 'stateeee')
       if (currentId) {
         if (id !== currentId) {
-          // const { reader, store: { [id]: book } } = yield select();
+          const { store } = rootState
+          const book = store[id]
+          console.log(store, book, 'store')
+          commit(STORE_SAVE, {
+            reader: {...state},
+            key: currentId
+          })
+          commit(READER_CLEAR)
           console.log(`将《${title}》放回书架`)
-          // if (book && book.detail && book.source) {
-          //   console.log(`从书架取回《${book.detail.title}》`);
-          //   return;
-          // }
+          if (book && book.detail && book.source) {
+            console.log(`从书架取回《${book.detail.title}》`)
+            commit(READER_SAVE, book)
+            return
+          }
         } else {
           return
         }
@@ -115,7 +139,7 @@ export default {
       }
     },
     async [READER_GETCHAPTER] ({commit, state, rootState, dispatch}) {
-      const { chapters, currentChapter } = state
+      const { chapters, currentChapter, currentSource } = state
       const { link } = chapters[currentChapter || 0]
       // const { chapter } =
       const data = await fetch({
@@ -124,6 +148,7 @@ export default {
         k: '2124b73d7e2e1945',
         t: 1468223717
       })
+      console.log(data, 333)
       if (data.statusCode === 200) {
         const { chapter } = data.data
         if (chapter) {
@@ -134,6 +159,10 @@ export default {
           console.log(`章节获取失败`)
           dispatch(READER_GETNEXTSOURCE)
         }
+      } else {
+        console.log('error 这个源有问题,换下一个')
+        commit(READER_SAVE, {currentSource: (currentSource + 1)})
+        dispatch(READER_GETCHAPTERLIST)
       }
     },
     async [READER_GOTOCHAPTER] ({commit, state, rootState, dispatch}, payload) {

@@ -21,6 +21,7 @@
         console.log(this.chapter, 'ch')
         if (this.chapter.body) {
           // console.log(this.chapter.body.indexOf('\n'), 'chapter')
+          document.title = this.chapter.title
           let data = this.chapter.body.split('\n')
           // console.log(this.chapter, data, 'chapter')
           return data

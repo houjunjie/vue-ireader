@@ -84,8 +84,15 @@ export default function fetch (options) {
       statusCode = 600
       msg = error.message || 'Network Error'
     }
-    // eslint-disable-next-line
-    return Promise.reject({ success: false, statusCode, message: msg })
-    /* eslint-disable */
+    return Promise.resolve({
+      success: false,
+      statusCode,
+      message: msg
+    })
+    // return Promise.reject(new Error('error', {
+    //   success: false,
+    //   statusCode,
+    //   message: msg
+    // }))
   })
 }

@@ -3,6 +3,8 @@
 <!-- > A Vue.js project -->
 > 初学，打算做一个阅读网站练手
 
+api用的是追书的。
+
 ## Build Setup
 
 ``` bash

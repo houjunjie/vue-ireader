@@ -1,7 +1,7 @@
 <template>
   <div>
+    <h1>简(残缺)版小说阅读</h1>
     <current></current>
-    {{data}}
   </div>
 </template>
 
@@ -20,6 +20,10 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  h1{
+    padding:20px 0;
+    font-size: 20px;
+    text-align: center;
+  }
 </style>

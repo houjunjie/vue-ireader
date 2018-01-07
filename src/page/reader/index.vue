@@ -1,10 +1,9 @@
 <template>
   <div>
-  <content-detail></content-detail>
-  <!-- <head-detail></head-detail> -->
-  <span @click="goToChapters()">章节列表</span>
-  <span @click="prev()">上一章</span>
-  <span @click="next()">下一章</span>
+    <bar @next="next" @prev="prev" @goToChapters="goToChapters"></bar>
+    <content-detail></content-detail>
+    <!-- <head-detail></head-detail> -->
+    <bar @next="next" @prev="prev" @goToChapters="goToChapters"></bar>
   </div>
 </template>
 
@@ -13,6 +12,7 @@
   import { READER_GETSOURCE, READER_GOTOCHAPTER } from '../../store/reader.js'
   import contentDetail from './contentDetail.vue'
   import headDetail from './headDetail.vue'
+  import bar from './bar.vue'
   export default {
     name: 'reader',
     data: function () {
@@ -22,7 +22,8 @@
     },
     components: {
       contentDetail,
-      headDetail
+      headDetail,
+      bar
     },
     mounted: function () {
       console.log(this.$route.params)

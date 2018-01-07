@@ -3,7 +3,7 @@
     <h1 class="title">{{msg}}</h1>
     <ul class="list">
       <li v-for="(list, index) in reader.source" :key="index">
-        <a href="javascript:;" @click="goCps(list._id)">
+        <a href="javascript:;" @click="goCps(index)">
           <p class="name">
             来源网站：{{list.name}}
           </p>
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex'
-  import { READER_GETATOCSOURCE, READER_GETCHAPTERLIST } from '../../store/reader'
+  import { mapActions, mapState, mapMutations } from 'vuex'
+  import { READER_GETATOCSOURCE, READER_GETCHAPTERLIST, READER_SAVE } from '../../store/reader'
   export default {
     name: 'atocsource',
     data: function () {
@@ -36,10 +36,12 @@
       // this.READER_GETATOCSOURCE(this.$route.params.id)
     },
     methods: {
+      ...mapMutations([READER_SAVE]),
       ...mapActions([READER_GETATOCSOURCE, READER_GETCHAPTERLIST]),
-      goCps: function (id) {
+      goCps: function (index) {
         // this.$router.push({path: `/detail/${id}`})
-        this.READER_GETCHAPTERLIST(id)
+        this.READER_SAVE({currentSource: index})
+        this.READER_GETCHAPTERLIST()
         this.$router.push({path: '/cps'})
       }
     },

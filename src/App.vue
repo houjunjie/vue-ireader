@@ -23,6 +23,9 @@ export default {
   background: #fafbfc;
   position: relative;
 }
+a{
+  text-decoration:none;
+}
 *{
   padding: 0;
   margin: 0;

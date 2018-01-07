@@ -23,7 +23,7 @@
     // props:[],
     methods: {
       cancel: function () {
-        // this.props.history.goBack();
+        this.$router.push({path: '/'})
       },
       onSubmit: function () {
         console.log(this.searchVal)
