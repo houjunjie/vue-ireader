@@ -9,6 +9,11 @@ import Reader from '@/page/reader'
 import Chapter from '@/page/chapters'
 import AtocSource from '@/page/atocsource'
 
+Router.prototype.goBack = function () {
+  this.isBack = true
+  window.history.go(-1)
+}
+
 Vue.use(Router)
 
 export default new Router({

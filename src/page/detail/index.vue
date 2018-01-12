@@ -54,7 +54,7 @@
         this.SEARCH_GETBOOKDETAIL(this.$route.params.id)
       },
       back: function () {
-        this.$router.go(-1)
+        this.$router.goBack()
       },
       readNow: function (id) {
         console.log(id, 'id')

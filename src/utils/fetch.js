@@ -3,6 +3,8 @@ import axios from 'axios'
 // import qs from 'qs'
 // import jsonp from 'jsonp'
 import lodash from 'lodash'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 // import pathToRegexp from 'path-to-regexp'
 // import { message } from 'antd'
 // import { YQL, CORS } from './config'
@@ -26,7 +28,7 @@ const request = (options) => {
   //   axios.defaults.headers.common['Authorization-Admin-User'] = `admin_user_access_token ${AUTH_TOKEN}`
   // }
   const cloneData = lodash.cloneDeep(data)
-
+  NProgress.start()
   switch (method.toLowerCase()) {
     case 'get':
       return axios.get(url, {
@@ -57,6 +59,7 @@ export default function fetch (options) {
     //   }
     // }
     console.log(data)
+    NProgress.done()
     return Promise.resolve({
       success: true,
       message: statusText,
@@ -64,6 +67,7 @@ export default function fetch (options) {
       data: data
     })
   }).catch((error) => {
+    NProgress.done()
     const { response } = error
     console.log(response, error, 'err')
     let msg

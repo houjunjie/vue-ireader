@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { mapActions, mapState, mapMutations } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
   import { READER_GETATOCSOURCE, READER_GETCHAPTERLIST, READER_SAVE } from '../../store/reader'
   export default {
     name: 'atocsource',
@@ -36,12 +36,11 @@
       // this.READER_GETATOCSOURCE(this.$route.params.id)
     },
     methods: {
-      ...mapMutations([READER_SAVE]),
-      ...mapActions([READER_GETATOCSOURCE, READER_GETCHAPTERLIST]),
-      goCps: function (index) {
+      ...mapActions([READER_GETATOCSOURCE, READER_GETCHAPTERLIST, READER_SAVE]),
+      goCps: function (id) {
         // this.$router.push({path: `/detail/${id}`})
-        this.READER_SAVE({currentSource: index})
-        this.READER_GETCHAPTERLIST()
+        this.READER_SAVE({index})
+        // this.READER_GETCHAPTERLIST(id)
         this.$router.push({path: '/cps'})
       }
     },

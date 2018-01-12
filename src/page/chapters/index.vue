@@ -41,7 +41,7 @@
     methods: {
       ...mapActions([READER_GOTOCHAPTER]),
       back: function () {
-        this.$router.go(-1)
+        this.$router.goBack()
       },
       goToChapter: function (nextChapter) {
         this.READER_GOTOCHAPTER(nextChapter)
